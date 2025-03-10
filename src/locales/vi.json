@@ -1,0 +1,18 @@
+{
+  "navBar": {
+    "home": "Trang chủ",
+    "about_me": "về tôi",
+    "skill": "kĩ năng",
+    "work": "làm việc",
+    "contact_me": "liên lạc"
+  },
+  "home": {
+    "s1Desc": "Đừng ngần ngại kết nối với tôi. Hãy hợp tác với tôi ngay hôm nay!",
+    "s1btt": "Hiện Có Thể Nhận Việc",
+    "s1Title": "lập trình viên",
+    "s2Desc": "Xin chào, tôi là Mã Ngọc Hiếu, một Frontend Developer tâm huyết với nền tảng vững chắc về các nguyên tắc phát triển web, được hỗ trợ bởi bằng cử nhân của tôi. Tôi phát triển mạnh về nghề thủ công giao diện lấy người dùng làm trung tâm và tìm thấy niềm vui trong việc vượt qua các thách thức phát triển một cách sáng tạo. Của tôi theo đuổi liên tục là nâng cao trải nghiệm người dùng thông qua các phương pháp mã hóa sáng tạo và giải pháp thiết kế hiệu quả, đáp ứng.",
+    "s2Title": "Lập trình giao diện website",
+    "s5Title": "Dự án",
+    "s5Desc": "Đây là những dự án tôi đã tham gia. Mỗi dự án đều cho tôi cơ hội phát triển kỹ năng của mình, cộng tác với những đội ngũ tài năng và vượt qua những thử thách riêng. Thông qua những trải nghiệm này, tôi đã có được những hiểu biết sâu sắc quý giá và cải thiện khả năng giải quyết vấn đề một cách hiệu quả."
+  }
+}

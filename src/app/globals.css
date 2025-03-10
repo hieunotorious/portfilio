@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+@layer base {
+  @font-face {
+    font-family: 'Paris2024';
+    src: url('/public/font/Paris2024-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+}
+@layer components {
+  .text-display1 {
+    @apply text-[40px] leading-[120%] xl:text-[60px] xl:leading-[120%] tracking-[-2%] font-PARIS xl:font-bold font-semibold;
+  }
+  .text-display2 {
+    @apply text-[32px] leading-[120%] xl:text-[48px] xl:leading-[120%] tracking-[-2%] font-PARIS xl:font-bold font-semibold;
+  }
+  .text-display3 {
+    @apply text-[28px] leading-[170%] xl:text-[36px]  tracking-[-2%] font-PARIS xl:font-bold font-semibold;
+  }
+  .text-headline1 {
+    @apply text-[24px] leading-[125%] xl:text-[32px] xl:leading-[120%] font-PARIS font-semibold;
+  }
+  .text-headline2 {
+    @apply text-[22px] leading-[120%] xl:text-[28px] xl:leading-[120%] font-PARIS font-semibold;
+  }
+  .text-headline3 {
+    @apply text-[20px] leading-[120%] xl:text-[24px] xl:leading-[125%] font-PARIS font-semibold;
+  }
+  .text-title1 {
+    @apply text-[18px] leading-[145%] xl:text-[22px] xl:leading-[145%] font-PARIS font-semibold;
+  }
+  .text-title2 {
+    @apply text-[16px] leading-[150%] xl:text-[18px] xl:leading-[145%] font-PARIS font-semibold;
+  }
+  .text-title3 {
+    @apply text-[14px] leading-[140%] xl:text-[16px] xl:leading-[150%] font-PARIS font-semibold;
+  }
+  .text-button1 {
+    @apply text-[14px] leading-[140%] xl:text-[16px] xl:leading-[150%] font-PARIS font-semibold;
+  }
+  .text-button2 {
+    @apply text-[12px] leading-[150%] xl:text-[14px] xl:leading-[140%] font-PARIS font-semibold;
+  }
+  .text-body1 {
+    @apply text-[14px] leading-[140%] xl:text-[16px] xl:leading-[150%] font-NOTO font-normal;
+  }
+  .text-body2 {
+    @apply text-[12px] leading-[150%] xl:text-[14px] xl:leading-[150%] font-PARIS font-normal;
+  }
+  .text-body3 {
+    @apply text-[10px] leading-[140%] xl:text-[12px] xl:leading-[150%] font-PARIS font-normal;
+  }
+  .text-label1 {
+    @apply text-[14px] leading-[140%] xl:text-[16px] xl:leading-[150%] font-NOTO font-medium;
+  }
+  .text-label2 {
+    @apply text-[12px] leading-[150%] xl:text-[14px] xl:leading-[140%] font-PARIS font-medium;
+  }
+  .text-label3 {
+    @apply text-[10px] leading-[140%] xl:text-[12px] xl:leading-[150%] font-PARIS font-medium;
+  }
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: var(--font-geist-Noto);
+}
+* {
+  box-sizing: border-box;
+}
