@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 const ButtonEncrypt = () => {
   return (
-    <div className="place-content-center grid">
+    <div className="place-content-center grid z-30">
       <EncryptButton />
     </div>
   );
@@ -66,13 +66,13 @@ const EncryptButton = () => {
       onMouseLeave={stopScramble}
       style={{
         background:
-          'linear-gradient(#0B0F17, #0B0F17) padding-box, linear-gradient(90deg, #97E021 0%, #FF9B0F 32%, #FF5912 65.5%, #FFE416 89%) border-box',
+          'linear-gradient(#0B0F17, #0B0F17) padding-box, linear-gradient(90deg, #97E021 0%, #FF9B0F 32%, #FF5912 65.5%, #FFE416 89%) border-box ',
         borderRadius: '999px',
         border: '1px solid transparent',
       }}
       className="group relative overflow-hidden text-NOTO  bg-buttonWork px-4 py-2 font-mono font-medium capitalize text-white transition-colors hover:text-white"
     >
-      <div className="relative z-10 flex items-center gap-2">
+      <div className="relative z-30 flex items-center gap-2">
         <span className="text-NOTO">{text}</span>
       </div>
       <motion.span

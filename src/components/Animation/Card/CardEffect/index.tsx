@@ -14,7 +14,7 @@ export function CardEffect() {
             alt=""
             width={50}
             height={50}
-            className="w-[546px] h-full object-cover rounded-xl shadow-xl grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0"
+            className="w-full lg:w-[546px] h-full object-cover rounded-xl shadow-xl grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0"
           />
         </CardItem>
       </CardBody>

@@ -19,8 +19,8 @@ const SocialIcon = ({ icon, hoverColor, strokeColor, href, ...props }: SocialIco
         border: `1px solid ${COLOR.white}`,
         borderRadius: '50%',
         cursor: 'pointer',
-        width: '60px',
-        height: '60px',
+        width: '50px',
+        height: '50px',
         transition: 'all 300ms ease-in-out',
         '&:hover': {
           background: COLOR.white,

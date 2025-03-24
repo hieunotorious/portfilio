@@ -19,6 +19,10 @@ const IMAGES = {
   p13: '/images/p13.webp',
   p14: '/images/p14.webp',
   p15: '/images/p15.webp',
+  s1: '/images/s1.webp',
+  s2: '/images/s2.webp',
+  s3: '/images/s3.webp',
+  s4: '/images/s4.webp',
 };
 
 export default IMAGES;

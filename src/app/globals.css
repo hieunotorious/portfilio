@@ -65,7 +65,10 @@
     @apply text-[10px] leading-[140%] xl:text-[12px] xl:leading-[150%] font-PARIS font-medium;
   }
 }
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
