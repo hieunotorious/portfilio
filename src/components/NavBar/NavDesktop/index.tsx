@@ -1,11 +1,10 @@
 'use client';
 
+import EyeTracker from '@/components/EyeMovement';
 import { usePathname, useRouter } from '@/navigation';
 import { useTranslations } from 'next-intl';
-import { LanguageSelector } from '../LanguageSelector';
-import Image from 'next/image';
-import IMAGES from '@/constant/IMAGES_ROUTES';
 import React from 'react';
+import { LanguageSelector } from '../LanguageSelector';
 
 type Props = {
   locale: string;
@@ -66,15 +65,7 @@ const NavDesktop = ({ locale }: Props) => {
                   <h1 className="capitalize">{section.label}</h1>
                 </button>
 
-                {section.label === t('skill') && (
-                  <Image
-                    src={IMAGES.logoPortfolio}
-                    alt=""
-                    height={48}
-                    width={105}
-                    className="w-[105px] h-auto"
-                  />
-                )}
+                {section.label === t('skill') && <EyeTracker />}
               </React.Fragment>
             );
           })}

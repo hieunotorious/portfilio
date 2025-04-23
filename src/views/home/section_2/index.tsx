@@ -14,7 +14,7 @@ const Section2 = () => {
     <div
       id="about_me"
       ref={ref}
-      className="flex justify-center items-center flex-col gap-8 lg:gap-[96px] mt-[96px] px-5 h-max"
+      className="flex justify-center items-center flex-col gap-8 lg:gap-[96px] mt-[96px] px-5"
     >
       <motion.h1
         initial={{ y: -50, opacity: 0, filter: 'blur(10px)' }}
