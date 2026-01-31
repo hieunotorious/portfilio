@@ -16,7 +16,7 @@ const Home = () => {
         background: 'linear-gradient(163.43deg, #0B1301 11.46%, #0B1301 56.2%, #0B1301 101.84%)',
       }}
     >
-      <SplashCursor />
+      {/* <SplashCursor /> */}
       <div className="bg-black  bg-bgHome bg-no-repeat bg-cover bg-center sticky top-0 panel w-full h-screen min-h-[100vh]">
         <Section1 />
       </div>

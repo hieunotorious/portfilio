@@ -23,5 +23,17 @@
   },
   "footer": {
     "title": "PSSSST... TÔI ĐANG CHỜ BẠN ĐÓ!"
+  },
+
+  "birthdayInvitation": {
+    "title": "Trân trọng kính mời!",
+    "celebrateWith": "Cùng chúng tôi chúc mừng sinh nhật",
+    "birthday": "Sinh nhật!",
+    "dateLabel": "Ngày",
+    "timeLabel": "Thời gian",
+    "locationLabel": "Địa điểm",
+    "phoneLabel": "Điện thoại",
+    "footer": "Rất mong được chung vui cùng bạn! 🎊",
+    "th": "tuổi"
   }
 }

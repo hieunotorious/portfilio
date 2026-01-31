@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import { TextGenerate } from './Text';
+import IMAGES from '@/constant/IMAGES_ROUTES';
+import { PixelatedCanvas } from '@/components/Pixel';
 
 const Section2 = () => {
   const t = useTranslations();
@@ -29,7 +31,30 @@ const Section2 = () => {
           <h1 key={isInView ? 'visible' : 'hidden'}>
             <TextGenerate />
           </h1>
-          <motion.div
+          <div className="mx-auto flex justify-end">
+            <PixelatedCanvas
+              src={IMAGES.port}
+              width={400}
+              height={500}
+              cellSize={4}
+              dotScale={0.9}
+              shape="square"
+              backgroundColor="#000000"
+              dropoutStrength={0.2}
+              interactive
+              distortionStrength={3}
+              distortionRadius={70}
+              distortionMode="swirl"
+              followSpeed={0.2}
+              jitterStrength={5}
+              jitterSpeed={4}
+              sampleAverage
+              tintColor="#FFFFFF"
+              tintStrength={0.1}
+              className="rounded-xl border border-neutral-800 shadow-lg"
+            />
+          </div>
+          {/* <motion.div
             initial={{ opacity: 0 }}
             animate={{
               opacity: [0, 1, 0.5, 1, 0.7, 1],
@@ -40,8 +65,10 @@ const Section2 = () => {
               repeat: 1,
             }}
           >
+          
+
             <CardEffect />
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </div>

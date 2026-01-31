@@ -23,5 +23,17 @@
   },
   "footer": {
     "title": "PSSSST... i’M WAITING FOR YOU!"
+  },
+
+  "birthdayInvitation": {
+    "title": "You're Invited!",
+    "celebrateWith": "Join us in celebrating",
+    "birthday": "Birthday!",
+    "dateLabel": "Date",
+    "timeLabel": "Time",
+    "locationLabel": "Location",
+    "phoneLabel": "Phone",
+    "footer": "Can't wait to celebrate with you! 🎊",
+    "th": "th"
   }
 }

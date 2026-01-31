@@ -131,9 +131,9 @@ const NavMobile = ({ locale }: Props) => {
 
           <div className="flex gap-4 items-center">
             <LanguageSelector locale={locale} onChangeLanguage={handleChangeLanguage} />
-            <div className="w-9 h-9 flex items-center justify-center">
+            {/* <div className="w-9 h-9 flex items-center justify-center">
               <ButtonMenu isOpen={menuState.isOpen} onClick={handleMenuToggle} />
-            </div>
+            </div> */}
           </div>
         </div>
 
