@@ -7,6 +7,7 @@ import Section2 from './section_2';
 import { Section4 } from './section_4';
 import { Section5 } from './section_5';
 import EyeTracker from '@/components/EyeMovement';
+import { CardEffect } from '@/components/Animation/Card/CardEffect';
 
 const Home = () => {
   return (
@@ -26,7 +27,9 @@ const Home = () => {
           background: 'linear-gradient(163.43deg, #0B1301 11.46%, #0B1301 56.2%, #0B1301 101.84%)',
         }}
       >
-        <Section2 />
+        <div className="hidden xl:block">
+          <Section2 />
+        </div>
         {/* <Section3 /> */}
         <Section4 />
         {/* <Section5 /> */}
