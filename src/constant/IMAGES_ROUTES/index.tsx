@@ -23,6 +23,8 @@ const IMAGES = {
   s2: '/images/s2.webp',
   s3: '/images/s3.webp',
   s4: '/images/s4.webp',
+  erp: '/images/erp.webp',
+  crm: '/images/crm.webp',
 };
 
 export default IMAGES;

@@ -81,6 +81,18 @@ const data2024 = [
     src: IMAGES.p7,
   },
 ];
+const data2025 = [
+  {
+    title: 'ERP',
+    link: '#',
+    src: IMAGES.erp,
+  },
+  {
+    title: 'Admin CRM',
+    link: '#',
+    src: IMAGES.crm,
+  },
+];
 export function Section4() {
   const data = [
     {
@@ -104,6 +116,14 @@ export function Section4() {
       content: (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <FocusCards cards={data2024} />
+        </div>
+      ),
+    },
+    {
+      title: '2025-2026',
+      content: (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <FocusCards cards={data2025} />
         </div>
       ),
     },
