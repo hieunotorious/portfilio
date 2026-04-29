@@ -19,27 +19,32 @@ const data2023 = [
 const middle2023 = [
   {
     title: 'ONEBIT VENTURES',
-    link: 'https://onebit.ventures',
+    link: '#',
+
     src: IMAGES.p1,
   },
   {
     title: 'ONEBIT STARTUPPAD',
-    link: 'https://onbpad.com',
+    link: '#',
+
     src: IMAGES.p2,
   },
   {
     title: 'TRENDYDEFI',
-    link: 'https://trendydefi.com/',
+    link: '#',
+
     src: IMAGES.p8,
   },
   {
     title: 'DARK KNIGHT GAMES',
-    link: 'https://darkknight.games',
+    link: '#',
+
     src: IMAGES.p3,
   },
   {
     title: 'CORE STAKE',
-    link: 'https://corestake.org',
+    link: '#',
+
     src: IMAGES.p13,
   },
   {
@@ -62,23 +67,28 @@ const middle2023 = [
 const data2024 = [
   {
     title: 'VIỆN PHONG THUỶ KHOA HỌC TOÀN CẦU',
-    link: 'https://daotao.phongthuydainam.vn',
+    link: '#',
     src: IMAGES.p4,
   },
   {
     title: 'KHOÁ HỌC PHONG THUỶ',
-    link: 'https://khpt.phongthuydainam.vn',
+    link: '#',
     src: IMAGES.p6,
   },
   {
     title: 'LUX FENGSHUI',
-    link: 'https://lux-fengshui.xheroapp.com',
+    link: '#',
     src: IMAGES.p5,
   },
   {
     title: 'LỊCH DỤNG SỰ',
     link: '#',
     src: IMAGES.p7,
+  },
+  {
+    title: 'Phong Thuỷ Đại Nam',
+    link: '#',
+    src: IMAGES.ptdn,
   },
 ];
 const data2025 = [

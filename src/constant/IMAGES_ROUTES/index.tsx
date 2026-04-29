@@ -25,6 +25,7 @@ const IMAGES = {
   s4: '/images/s4.webp',
   erp: '/images/ERP.webp',
   crm: '/images/CRM.webp',
+  ptdn: '/images/PTDN.webp',
 };
 
 export default IMAGES;
