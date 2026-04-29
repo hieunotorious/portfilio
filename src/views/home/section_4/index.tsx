@@ -90,6 +90,11 @@ const data2024 = [
     link: '#',
     src: IMAGES.ptdn,
   },
+  {
+    title: 'XHEROAPP',
+    link: '#',
+    src: IMAGES.downApp,
+  },
 ];
 const data2025 = [
   {

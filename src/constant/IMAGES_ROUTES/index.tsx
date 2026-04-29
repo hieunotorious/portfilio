@@ -26,6 +26,7 @@ const IMAGES = {
   erp: '/images/ERP.webp',
   crm: '/images/CRM.webp',
   ptdn: '/images/PTDN.webp',
+  downApp: '/images/downApp.png',
 };
 
 export default IMAGES;
