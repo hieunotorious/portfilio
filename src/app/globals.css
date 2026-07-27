@@ -75,6 +75,7 @@ body {
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: var(--font-geist-Noto);
+  background-color: #0b1301;
 }
 * {
   box-sizing: border-box;

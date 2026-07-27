@@ -99,7 +99,9 @@ const Section1 = () => {
             repeat: 1,
           }}
         >
-          <ButtonEncrypt />
+          <a href={`/portfolio`}>
+            <ButtonEncrypt />
+          </a>
         </motion.div>
         <motion.h1
           initial={{ y: 50, opacity: 0, filter: 'blur(10px)' }}

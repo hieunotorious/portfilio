@@ -17,42 +17,14 @@ const NavDesktop = ({ locale }: Props) => {
   const isBirthdayPage = pathname.includes('birthday');
 
   const sections = [
-    { id: 'about_me', label: t('about_me') },
-    { id: 'skill', label: t('skill') },
-    { id: 'work', label: t('work') },
-    { id: 'contact_me', label: t('contact_me') },
+    { id: 'about_me', portfolioId: 'about', label: t('about_me') },
+    { id: 'skill', portfolioId: 'skill', label: t('skill') },
+    { id: 'work', portfolioId: 'work', label: t('work') },
+    { id: 'contact_me', portfolioId: 'contact', label: t('contact_me') },
   ];
 
   const handleChangeLanguage = (newLocale: string) => {
     router.replace(pathname, { locale: newLocale });
-  };
-  const smoothScrollTo = (targetId: string, offset = 0, duration = 800) => {
-    const targetElement = document.getElementById(targetId);
-    if (!targetElement) return;
-
-    const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY + offset;
-    const startPosition = window.scrollY;
-    const distance = targetPosition - startPosition;
-    let startTime: number | null = null;
-
-    const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
-    };
-
-    const animation = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-
-      window.scrollTo(0, run);
-
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    };
-
-    requestAnimationFrame(animation);
   };
 
   return (
@@ -69,9 +41,12 @@ const NavDesktop = ({ locale }: Props) => {
               {sections.map((section) => {
                 return (
                   <React.Fragment key={section.id}>
-                    <button onClick={() => smoothScrollTo(section.id, -120)} className="text-white">
+                    <a
+                      href={`/${locale}/portfolio#${section.portfolioId}`}
+                      className="text-white"
+                    >
                       <h1 className="capitalize">{section.label}</h1>
-                    </button>
+                    </a>
 
                     {section.label === t('skill') && <EyeTracker />}
                   </React.Fragment>

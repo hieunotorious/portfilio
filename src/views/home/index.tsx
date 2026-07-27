@@ -18,10 +18,10 @@ const Home = () => {
       }}
     >
       {/* <SplashCursor /> */}
-      <div className="bg-black  bg-bgHome bg-no-repeat bg-cover bg-center sticky top-0 panel w-full h-screen min-h-[100vh]">
+      <div className="bg-black  bg-bgHome bg-no-repeat bg-cover bg-center sticky top-0 panel w-full h-screen ">
         <Section1 />
       </div>
-      <div
+      {/* <div
         className="relative  flex flex-col gap-[96px] rounded-[44px] z-10"
         style={{
           background: 'linear-gradient(163.43deg, #0B1301 11.46%, #0B1301 56.2%, #0B1301 101.84%)',
@@ -30,11 +30,11 @@ const Home = () => {
         <div className="hidden xl:block">
           <Section2 />
         </div>
-        {/* <Section3 /> */}
+        <Section3 />
         <Section4 />
-        {/* <Section5 /> */}
+        <Section5 />
         <FooterPortFolio />
-      </div>
+      </div> */}
     </div>
   );
 };
