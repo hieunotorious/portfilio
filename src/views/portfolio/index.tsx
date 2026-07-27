@@ -6,9 +6,9 @@ import Instagram_Color_Logo from '@/components/SocialIcon/SVG/Instagram_Color_Lo
 import Instagram_Logo from '@/components/SocialIcon/SVG/Instagram_Logo';
 import Zalo_Logo from '@/components/SocialIcon/SVG/Zalo_Logo';
 import COLOR from '@/constant/COLOR_ROUTES';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { NAV_LINKS, PROJECTS, SKILLS, STATS } from './data';
 
@@ -278,7 +278,7 @@ const Portfolio = () => {
                     className="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-sm dark:border-white/10 dark:bg-white/[0.03] sm:p-6"
                   >
                     <div className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 sm:text-4xl">
-                      {s.value}
+                      <AnimatedStatValue value={s.value} />
                     </div>
                     <div className="mt-1 text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 sm:text-xs">
                       {s.label}
@@ -326,7 +326,7 @@ const Portfolio = () => {
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true, amount: 0.6 }}
+                        viewport={{ once: false, amount: 0.6 }}
                         transition={{ duration: 1, ease: 'easeOut' }}
                         className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-700"
                         style={{ boxShadow: '0 0 12px 0 rgba(37, 99, 235, 0.6)' }}
@@ -446,6 +446,45 @@ const SectionLabel = ({
     {children}
   </div>
 );
+
+const AnimatedStatValue = ({ value }: { value: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: false, amount: 0.6 });
+  const [displayValue, setDisplayValue] = useState(0);
+  const target = Number.parseInt(value, 10);
+  const suffix = value.replace(String(target), '');
+
+  useEffect(() => {
+    if (!isInView || Number.isNaN(target)) {
+      setDisplayValue(0);
+      return;
+    }
+
+    let animationFrame = 0;
+    const duration = 1200;
+    const startTime = performance.now();
+
+    const count = (time: number) => {
+      const progress = Math.min((time - startTime) / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      setDisplayValue(Math.round(target * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(count);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(count);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isInView, target]);
+
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  );
+};
 
 const Glyph = ({ name }: { name: string }) => {
   const common = 'h-4 w-4 fill-current';
