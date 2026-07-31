@@ -26,6 +26,20 @@ const Portfolio = () => {
   const navigationTargetRef = useRef<string | null>(null);
   const scrollEndTimerRef = useRef<number | null>(null);
 
+  // Long smooth-scroll animations are expensive on phones, especially across
+  // a project-heavy page. Keep the desktop animation and jump directly on mobile.
+  useEffect(() => {
+    if (!window.matchMedia('(max-width: 767px)').matches) return;
+
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+
+    return () => {
+      root.style.scrollBehavior = previousScrollBehavior;
+    };
+  }, []);
+
   // Scrollspy: use one stable point in the viewport instead of comparing only
   // the entries changed by IntersectionObserver (which made long sections flicker).
   useEffect(() => {
@@ -84,10 +98,10 @@ const Portfolio = () => {
 
   return (
     <div className={dark ? 'dark' : ''}>
-      <div className="relative min-h-screen overflow-x-clip bg-[#f4f7ff] text-slate-900 transition-colors duration-500 dark:bg-[#05070d] dark:text-white">
+      <div className="relative min-h-screen overflow-x-clip bg-[#f4f7ff] text-slate-900 dark:bg-[#05070d] dark:text-white md:transition-colors md:duration-500">
         <div
           aria-hidden
-          className="pointer-events-none absolute right-0 top-0 h-[520px] w-[520px] rounded-full opacity-70 blur-[120px]"
+          className="pointer-events-none absolute right-0 top-0 hidden h-[520px] w-[520px] rounded-full opacity-70 blur-[120px] sm:block"
           style={{
             background: dark
               ? 'radial-gradient(circle, #1d4ed8 0%, transparent 70%)'
@@ -97,7 +111,7 @@ const Portfolio = () => {
 
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-[150px] z-0 select-none overflow-hidden lg:top-[100px]"
+          className="pointer-events-none absolute inset-x-0 top-[150px] z-0 hidden select-none overflow-hidden sm:block lg:top-[100px]"
         >
           <motion.div
             className="flex whitespace-nowrap"
@@ -115,7 +129,7 @@ const Portfolio = () => {
           </motion.div>
         </div>
 
-        <header className="sticky top-0 z-40 border-b border-black/5 bg-[#f4f7ff]/80 backdrop-blur-md dark:border-white/10 dark:bg-[#05070d]/80">
+        <header className="sticky top-0 z-40 border-b border-black/5 bg-[#f4f7ff]/95 dark:border-white/10 dark:bg-[#05070d]/95 md:bg-[#f4f7ff]/80 md:backdrop-blur-md md:dark:bg-[#05070d]/80">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:flex-nowrap sm:px-5 sm:py-5">
             <div className="flex items-center gap-2 lg:opacity-0">
               <span className="text-sm font-bold leading-tight">
@@ -410,9 +424,8 @@ const Portfolio = () => {
                     style={{
                       top: `calc(6rem + ${i * 12}px)`,
                       zIndex: i + 1,
-                      backdropFilter: 'blur(18.600000381469727px)',
                     }}
-                    className="bg-[linear-gradient(106.04deg, rgba(255, 255, 255, 0.3) 0.86%, rgba(226,241, 255, 0.3) 99.55%)] dark:bg-[linear-gradient(106.04deg, #000000 0.86%, #112A41 99.55%)] sticky grid grid-cols-1 gap-5 rounded-xl border border-blue-500/40 bg-white p-4 shadow-[0px_4px_4px_0px_#82BCF2] transition-shadow duration-300 sm:p-6 md:grid-cols-2 md:items-center dark:border-blue-500/40 dark:bg-[#0b0e16]/95 dark:shadow-none"
+                    className="grid grid-cols-1 gap-5 rounded-xl border border-blue-500/40 bg-white p-4 shadow-[0px_4px_4px_0px_#82BCF2] sm:p-6 md:sticky md:grid-cols-2 md:items-center md:backdrop-blur-[18.6px] md:transition-shadow md:duration-300 dark:border-blue-500/40 dark:bg-[linear-gradient(106.04deg,_#000000_0.86%,_#112A41_99.55%)] dark:shadow-none"
                   >
                     <div>
                       <div className="flex items-center gap-2 text-xs  text-[#474747] font-semibold dark:text-slate-400">
@@ -452,10 +465,10 @@ const Portfolio = () => {
                         alt={p.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 400px"
-                        className="object-cover transition-transform duration-700 ease-out group-hover/project-image:scale-110 group-hover/project-image:rotate-1"
+                        className="object-cover md:transition-transform md:duration-700 md:ease-out md:group-hover/project-image:scale-110 md:group-hover/project-image:rotate-1"
                       />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#B22E0D]/35 via-transparent to-white/20 opacity-0 transition-opacity duration-500 group-hover/project-image:opacity-100" />
-                      <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/3 -skew-x-12 bg-white/25 blur-md transition-transform duration-700 ease-out group-hover/project-image:translate-x-[450%]" />
+                      <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-tr from-[#B22E0D]/35 via-transparent to-white/20 opacity-0 transition-opacity duration-500 md:block md:group-hover/project-image:opacity-100" />
+                      <div className="pointer-events-none absolute -left-1/2 top-0 hidden h-full w-1/3 -skew-x-12 bg-white/25 blur-md transition-transform duration-700 ease-out md:block md:group-hover/project-image:translate-x-[450%]" />
                     </div>
                   </motion.article>
                 ))}
