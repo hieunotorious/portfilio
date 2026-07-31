@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import { NAV_LINKS, PROJECTS, SKILLS, STATS } from './data';
+import EyeTracker from '@/components/EyeMovement';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -142,10 +143,10 @@ const Portfolio = () => {
                         navigationTargetRef.current = null;
                       }, 150);
                     }}
-                    className={`relative transition-colors ${
+                    className={`relative transition-colors font-semibold ${
                       isActive
                         ? 'text-blue-600 dark:text-white'
-                        : 'text-slate-500 hover:text-blue-600 dark:text-slate-300 dark:hover:text-white'
+                        : 'text-[#474747] hover:text-blue-600 dark:text-slate-300 dark:hover:text-white'
                     }`}
                   >
                     {link.label}
@@ -188,30 +189,24 @@ const Portfolio = () => {
             className=" grid h-fit grid-cols-[104px_minmax(0,1fr)] gap-x-4 rounded-3xl border border-black/5 bg-white p-4 shadow-xl shadow-blue-500/5 dark:border-white/10 dark:bg-white/[0.03] sm:grid-cols-[160px_minmax(0,1fr)] sm:gap-x-6 sm:p-6 lg:sticky lg:top-24 lg:mb-0 lg:block lg:p-8"
           >
             <div className="col-start-2 mb-3 flex min-w-0 items-center gap-2 lg:mb-4">
-              {/* <div className="flex  items-center justify-center rounded-xl ">
-                <Image
-                  src="/images/portLogo.png"
-                  alt="Ma Ngoc Hieu"
-                  width={30}
-                  height={30}
-                  className="h-auto w-[68px] object-contain sm:w-[86px] lg:h-[44px] lg:w-[100px] lg:object-cover"
-                />
-              </div> */}
-              <span className="hidden text-[14px] font-bold leading-tight dark:text-blue-400 min-[390px]:block sm:text-lg lg:block">
+              <EyeTracker isDark={dark} />
+              <span className="hidden text-[14px] font-bold leading-tight dark:text-[#007EF5] min-[390px]:block sm:text-lg lg:block">
                 MA
                 <br />
                 NGOC HIEU
               </span>
             </div>
 
-            <div className="relative row-span-3 row-start-1 aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-[4/5]">
+            <div className=" group/project-image relative row-span-3 row-start-1 aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-[4/5]">
               <Image
                 src="/images/portAvatar.png"
                 alt="Ma Ngoc Hieu"
                 fill
                 sizes="(max-width: 640px) 104px, (max-width: 1024px) 160px, 300px"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-out group-hover/project-image:scale-110 group-hover/project-image:rotate-1"
               />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#B22E0D]/35 via-transparent to-white/20 opacity-0 transition-opacity duration-500 group-hover/project-image:opacity-100" />
+              <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/3 -skew-x-12 bg-white/25 blur-md transition-transform duration-700 ease-out group-hover/project-image:translate-x-[450%]" />
             </div>
 
             <h3 className="col-start-2 mt-0 text-base font-bold text-blue-600 dark:text-blue-400 sm:text-lg lg:mt-4">
@@ -277,7 +272,7 @@ const Portfolio = () => {
           </motion.aside>
 
           <div className="min-w-0">
-            <section className="flex min-h-0 flex-col justify-center py-10 sm:min-h-[55vh] sm:py-14 lg:min-h-[55vh] lg:py-0 lg:pt-6">
+            <section className="flex min-h-0 flex-col justify-center py-10 sm:min-h-[55vh] sm:py-14 lg:min-h-[60vh] lg:py-0 lg:pt-6">
               <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 <span className="h-2.5 w-2.5 rounded-sm bg-blue-600" />
                 Creative Frontend Developer
@@ -320,7 +315,6 @@ const Portfolio = () => {
               <h2 className="mt-4 max-w-md text-3xl font-extrabold leading-tight sm:text-4xl">
                 Crafting interfaces that perform.
               </h2>
-
               <div className="mt-8 grid grid-cols-1 gap-3 min-[420px]:grid-cols-3 sm:gap-4">
                 {STATS.map((s) => (
                   <motion.div
@@ -329,18 +323,17 @@ const Portfolio = () => {
                     whileInView="show"
                     viewport={{ once: true, amount: 0.2 }}
                     variants={fadeUp}
-                    className="rounded-2xl border border-black/5 bg-white p-4 text-center shadow-sm dark:border-white/10 dark:bg-white/[0.03] sm:p-6"
+                    className="group rounded-2xl border border-[#A6D1FA] bg-[linear-gradient(106.04deg,_#FFFFFF_0.86%,_#E2F1FF_99.55%)] p-6 text-center shadow-sm transition-all duration-500 hover:border-[#112A41] dark:bg-[linear-gradient(106.04deg,_#000000_0.86%,_#112A41_99.55%)] hover:shadow-lg hover:shadow-[#112A41]/30 dark:border-white/10 dark:bg-white/[0.03] dark:hover:bg-[linear-gradient(106.04deg,_#000000_0.86%,_#112A41_99.55%)] sm:p-6"
                   >
                     <div className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 sm:text-4xl">
                       <AnimatedStatValue value={s.value} />
                     </div>
-                    <div className="mt-1 text-[10px] font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400 sm:text-xs">
+                    <div className="mt-1 text-[10px] font-semibold uppercase tracking-wide text-[#666666] transition-colors duration-500 group-hover:text-white dark:text-slate-400 sm:text-xs">
                       {s.label}
                     </div>
                   </motion.div>
                 ))}
               </div>
-
               <div className="mt-8 max-w-3xl space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
                 <p>
                   Frontend developer passionate about{' '}
@@ -357,7 +350,6 @@ const Portfolio = () => {
                   intuitive and impactful.
                 </p>
               </div>
-
               <a
                 href="/cv.pdf"
                 className="mt-6 inline-block rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B22E0D]"
@@ -415,14 +407,19 @@ const Portfolio = () => {
                     viewport={{ once: true, amount: 0.15 }}
                     variants={fadeUp}
                     transition={{ duration: 0.5 }}
-                    className="grid grid-cols-1 gap-5 rounded-3xl border border-blue-500/40 bg-white p-4 shadow-[0_0_45px_0_rgba(37,99,235,0.4)] transition-shadow duration-300 hover:shadow-[0_0_65px_4px_rgba(37,99,235,0.6)] sm:p-6 md:grid-cols-2 md:items-center dark:border-blue-500/40 dark:bg-white/[0.03]"
+                    style={{
+                      top: `calc(6rem + ${i * 12}px)`,
+                      zIndex: i + 1,
+                      backdropFilter: 'blur(18.600000381469727px)',
+                    }}
+                    className="bg-[linear-gradient(106.04deg, rgba(255, 255, 255, 0.3) 0.86%, rgba(226,241, 255, 0.3) 99.55%)] dark:bg-[linear-gradient(106.04deg, #000000 0.86%, #112A41 99.55%)] sticky grid grid-cols-1 gap-5 rounded-xl border border-blue-500/40 bg-white p-4 shadow-[0px_4px_4px_0px_#82BCF2] transition-shadow duration-300 sm:p-6 md:grid-cols-2 md:items-center dark:border-blue-500/40 dark:bg-[#0b0e16]/95 dark:shadow-none"
                   >
                     <div>
-                      <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-                        <span className="h-2 w-2 rounded-full bg-blue-600" />
+                      <div className="flex items-center gap-2 text-xs  text-[#474747] font-semibold dark:text-slate-400">
+                        <span className="h-2 w-2 rounded-full bg-blue-600 " />
                         {p.period}
                       </div>
-                      <h3 className="mt-3 text-2xl font-bold text-blue-600 dark:text-blue-400">
+                      <h3 className="mt-3 text-2xl font-bold text-[#007EF5] dark:text-blue-400">
                         {p.title}
                       </h3>
                       <div className="mt-3 h-px w-24 bg-blue-600/40" />
@@ -431,33 +428,34 @@ const Portfolio = () => {
                         {p.tags.map((t) => (
                           <span
                             key={t}
-                            className="rounded-md border border-black/10 px-2.5 py-1 text-xs text-slate-600 dark:border-white/15 dark:text-slate-300"
+                            className="rounded-md border border-black/10 px-2.5 font-semibold py-1 text-xs text-[#666666] dark:border-white/15 dark:text-slate-300"
                           >
                             {t}
                           </span>
                         ))}
                       </div>
                       <div className="mt-2 flex flex-wrap gap-2 text-xs">
-                        <span className="rounded-md border border-black/10 px-2.5 py-1 text-slate-600 dark:border-white/15 dark:text-slate-300">
+                        <span className="font-semibold rounded-md border border-black/10 px-2.5 py-1 text-[#666666] dark:border-white/15 dark:text-slate-300">
                           {p.role}
                         </span>
-                        <span className="rounded-md border border-black/10 px-2.5 py-1 text-slate-600 dark:border-white/15 dark:text-slate-300">
+                        <span className="font-semibold rounded-md border border-black/10 px-2.5 py-1 text-[#666666] dark:border-white/15 dark:text-slate-300">
                           {p.members}
                         </span>
-                        <span className="rounded-md border border-black/10 px-2.5 py-1 text-slate-600 dark:border-white/15 dark:text-slate-300">
+                        <span className="font-semibold rounded-md border border-black/10 px-2.5 py-1 text-[#666666] dark:border-white/15 dark:text-slate-300">
                           {p.progress}
                         </span>
                       </div>
                     </div>
-
-                    <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
+                    <div className="group/project-image relative aspect-[16/10] w-full overflow-hidden rounded-2xl">
                       <Image
                         src={p.image}
                         alt={p.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 400px"
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 ease-out group-hover/project-image:scale-110 group-hover/project-image:rotate-1"
                       />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#B22E0D]/35 via-transparent to-white/20 opacity-0 transition-opacity duration-500 group-hover/project-image:opacity-100" />
+                      <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/3 -skew-x-12 bg-white/25 blur-md transition-transform duration-700 ease-out group-hover/project-image:translate-x-[450%]" />
                     </div>
                   </motion.article>
                 ))}

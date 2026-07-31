@@ -27,6 +27,8 @@ const IMAGES = {
   crm: '/images/CRM.webp',
   ptdn: '/images/PTDN.webp',
   downApp: '/images/downApp.png',
+  lightMonkey: '/images/darkMonkey.png',
+  darkMonkey: '/images/lightMonkey.png',
 };
 
 export default IMAGES;

@@ -2,8 +2,14 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import IMAGES from '@/constant/IMAGES_ROUTES';
 
-const EyeTracker = () => {
+type EyeTrackerProps = {
+  isDark?: boolean;
+};
+
+const EyeTracker = ({ isDark }: EyeTrackerProps) => {
   const eyesRef = useRef<HTMLDivElement[]>([]);
+  const monkeyImage =
+    isDark === undefined ? IMAGES.logoPortfolio : isDark ? IMAGES.darkMonkey : IMAGES.lightMonkey;
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -35,8 +41,8 @@ const EyeTracker = () => {
   return (
     <div className="relative w-[105px] h-auto">
       <Image
-        src={IMAGES.logoPortfolio}
-        alt=""
+        src={monkeyImage}
+        alt="Monkey logo"
         height={48}
         width={105}
         className="w-[105px] h-auto"
@@ -53,7 +59,11 @@ const EyeTracker = () => {
             }}
             className="relative w-6 h-6  rounded-full flex justify-center items-center"
           >
-            <div className="pupil absolute w-2.5 h-2.5 bg-white rounded-full transition-transform duration-75"></div>
+            <div
+              className={`pupil absolute h-2.5 w-2.5 rounded-full transition-transform duration-75 ${
+                isDark === false ? 'bg-black' : 'bg-white'
+              }`}
+            />
           </div>
         ))}
       </div>
