@@ -22,23 +22,63 @@ const SECTION_IDS = NAV_LINKS.map((l) => l.href.replace('#', ''));
 const Portfolio = () => {
   const [dark, setDark] = useState(true);
   const [active, setActive] = useState<string>(SECTION_IDS[0]);
+  const navigationTargetRef = useRef<string | null>(null);
+  const scrollEndTimerRef = useRef<number | null>(null);
 
-  // Scrollspy: highlight the nav link whose section is currently in view.
+  // Scrollspy: use one stable point in the viewport instead of comparing only
+  // the entries changed by IntersectionObserver (which made long sections flicker).
   useEffect(() => {
-    const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
-      (el): el is HTMLElement => !!el
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] }
-    );
-    sections.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    let frame = 0;
+
+    const updateActiveSection = () => {
+      if (navigationTargetRef.current) {
+        setActive(navigationTargetRef.current);
+        return;
+      }
+
+      const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(
+        (section): section is HTMLElement => !!section
+      );
+      const marker = window.scrollY + Math.min(window.innerHeight * 0.35, 280);
+      let currentSection = sections[0]?.id ?? SECTION_IDS[0];
+      const isAtPageBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+      if (isAtPageBottom && sections.length > 0) {
+        currentSection = sections[sections.length - 1].id;
+      } else {
+        for (const section of sections) {
+          if (section.offsetTop <= marker) currentSection = section.id;
+          else break;
+        }
+      }
+
+      setActive((previous) => (previous === currentSection ? previous : currentSection));
+    };
+
+    const handleViewportChange = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updateActiveSection);
+
+      if (navigationTargetRef.current) {
+        if (scrollEndTimerRef.current) window.clearTimeout(scrollEndTimerRef.current);
+        scrollEndTimerRef.current = window.setTimeout(() => {
+          navigationTargetRef.current = null;
+          updateActiveSection();
+        }, 150);
+      }
+    };
+
+    updateActiveSection();
+    window.addEventListener('scroll', handleViewportChange, { passive: true });
+    window.addEventListener('resize', handleViewportChange);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      if (scrollEndTimerRef.current) window.clearTimeout(scrollEndTimerRef.current);
+      window.removeEventListener('scroll', handleViewportChange);
+      window.removeEventListener('resize', handleViewportChange);
+    };
   }, []);
 
   return (
@@ -91,6 +131,17 @@ const Portfolio = () => {
                   <a
                     key={link.label}
                     href={link.href}
+                    onClick={() => {
+                      const target = link.href.slice(1);
+                      navigationTargetRef.current = target;
+                      setActive(target);
+                      if (scrollEndTimerRef.current) {
+                        window.clearTimeout(scrollEndTimerRef.current);
+                      }
+                      scrollEndTimerRef.current = window.setTimeout(() => {
+                        navigationTargetRef.current = null;
+                      }, 150);
+                    }}
                     className={`relative transition-colors ${
                       isActive
                         ? 'text-blue-600 dark:text-white'
@@ -111,7 +162,7 @@ const Portfolio = () => {
             <div className="flex items-center rounded-full  bg-white/60 p-1 text-xs font-semibold backdrop-blur dark:border-white/10 dark:bg-white/5">
               <button
                 onClick={() => setDark(false)}
-                className={`rounded-full px-3 py-1 transition-colors ${
+                className={`rounded-full px-3 py-1 transition-colors duration-300 hover:bg-[#B22E0D] hover:text-white ${
                   !dark ? 'bg-blue-600 text-white' : 'text-slate-400'
                 }`}
               >
@@ -119,7 +170,7 @@ const Portfolio = () => {
               </button>
               <button
                 onClick={() => setDark(true)}
-                className={`rounded-full px-3 py-1 transition-colors ${
+                className={`rounded-full px-3 py-1 transition-colors duration-300 hover:bg-[#B22E0D] hover:text-white ${
                   dark ? 'bg-blue-600 text-white' : 'text-slate-500'
                 }`}
               >
@@ -248,13 +299,16 @@ const Portfolio = () => {
               <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-6">
                 <a
                   href="#contact"
-                  className="rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B22E0D]"
                 >
                   Contact me
                 </a>
-                <a href="#work" className="group flex items-center gap-3 text-sm font-semibold">
+                <a
+                  href="#work"
+                  className="group flex items-center gap-3 rounded-full py-1 pl-4 pr-1 text-sm font-semibold transition-all duration-300 hover:bg-[#B22E0D] hover:text-white"
+                >
                   View all project
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-current transition-transform group-hover:translate-x-1">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-current transition-all duration-300 group-hover:border-white group-hover:bg-white group-hover:text-[#B22E0D]">
                     →
                   </span>
                 </a>
@@ -306,7 +360,7 @@ const Portfolio = () => {
 
               <a
                 href="/cv.pdf"
-                className="mt-6 inline-block rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5"
+                className="mt-6 inline-block rounded-full bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B22E0D]"
               >
                 Download CV
               </a>
@@ -417,7 +471,7 @@ const Portfolio = () => {
               </h2>
               <a
                 href="mailto:hieumn2001@gmail.com"
-                className="mt-8 inline-block max-w-full break-all rounded-full bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-transform hover:-translate-y-0.5 sm:px-8"
+                className="mt-8 inline-block max-w-full break-all rounded-full bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#B22E0D] sm:px-8"
               >
                 hieumn2001@gmail.com
               </a>
@@ -483,27 +537,6 @@ const AnimatedStatValue = ({ value }: { value: string }) => {
       {displayValue}
       {suffix}
     </span>
-  );
-};
-
-const Glyph = ({ name }: { name: string }) => {
-  const common = 'h-4 w-4 fill-current';
-  if (name === 'phone')
-    return (
-      <svg viewBox="0 0 24 24" className={common}>
-        <path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1L6.6 10.8z" />
-      </svg>
-    );
-  if (name === 'mail')
-    return (
-      <svg viewBox="0 0 24 24" className={common}>
-        <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
-      </svg>
-    );
-  return (
-    <svg viewBox="0 0 24 24" className={common}>
-      <path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
-    </svg>
   );
 };
 
