@@ -425,7 +425,7 @@ const Portfolio = () => {
                       top: `calc(6rem + ${i * 12}px)`,
                       zIndex: i + 1,
                     }}
-                    className="grid grid-cols-1 gap-5 rounded-xl border border-blue-500/40 bg-white p-4 shadow-[0px_4px_4px_0px_#82BCF2] sm:p-6 md:sticky md:grid-cols-2 md:items-center md:backdrop-blur-[18.6px] md:transition-shadow md:duration-300 dark:border-blue-500/40 dark:bg-[linear-gradient(106.04deg,_#000000_0.86%,_#112A41_99.55%)] dark:shadow-none"
+                    className="sticky grid grid-cols-1 gap-5 rounded-xl border border-blue-500/40 bg-white p-4 shadow-[0px_4px_4px_0px_#82BCF2] sm:p-6 md:grid-cols-2 md:items-center md:backdrop-blur-[18.6px] md:transition-shadow md:duration-300 dark:border-blue-500/40 dark:bg-[linear-gradient(106.04deg,_#000000_0.86%,_#112A41_99.55%)] dark:shadow-none"
                   >
                     <div>
                       <div className="flex items-center gap-2 text-xs  text-[#474747] font-semibold dark:text-slate-400">
